@@ -51,6 +51,12 @@ p {
     width: 100%;
 }
 
+}
+.human{
+  grid-row: 2/3;
+  grid-column: 2/3;
+}
+
 .grid-item:nth-child(1){
     background: #009687f5;
 }
@@ -111,7 +117,7 @@ p {
     padding: 0.8em 0.8em 1.8em;
     margin:0;
     box-sizing: border-box;
-    font-size: 1.2em;
+    font-size: .7em;
     font-weight: 600;
     color: #fff;
 }
