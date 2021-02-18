@@ -194,15 +194,6 @@ dinoTiles.prototype.compareThree = function(){
   }
 };
 
-
-// Prevent form submittal if data isn't entered
-document.getElementById('btn').addEventListener('click', function(event){
-  const name = humanData.getName();
-  if(name === ""){
-    event.preventDefault();
-  }
-});
-
 // Remove form from screen
 document.getElementById('btn').addEventListener('click', hideForm);
 
