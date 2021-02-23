@@ -105,7 +105,7 @@ function dinoTiles(dinoNum){
       return "Dinosaurs are estimated to have gone extinct about 66 millions years ago ";
     }
     else {
-       return dinoData[dinoNum].fact;
+       return dinoData[dinoNum].fact();
      }
   }
 
@@ -114,15 +114,21 @@ function dinoTiles(dinoNum){
 
 // Create Dino Objects
 
-const Tri = new dinoTiles(0);
-const Tyr = new dinoTiles(1);
-const Ank = new dinoTiles(2);
-const Bra = new dinoTiles(3);
-const Ste = new dinoTiles(4);
-const Ela = new dinoTiles(5);
-const Pte = new dinoTiles(6);
-const Pig = new dinoTiles(7);
 
+for (var i = 0; i < dinoData.length; i++) {
+  dinoData[i] = new dinoTiles(i);
+}
+
+/*
+const Triceratops = new dinoTiles(0);
+const TyrannosaurusRex = new dinoTiles(1);
+const Anklyosaurus = new dinoTiles(2);
+const Brachiosaurus = new dinoTiles(3);
+const Stegosaurus = new dinoTiles(4);
+const Elasmosaurus = new dinoTiles(5);
+const Pteranodon = new dinoTiles(6);
+const Pigeon = new dinoTiles(7);
+*/
 // Create Human Object
 
 const human = {
@@ -168,9 +174,14 @@ let humanData = (function(){
 // Compare weight
 
 dinoTiles.prototype.compareOne = function(){
-  var humanWeight = `${human.weight()}`;
-  var weightDiff = parseInt(this.weight) - parseInt(humanWeight);
-  return "The " + this.species + " weighed " + weightDiff + " lbs more than you!";
+  const humanWeight = `${human.weight()}`;
+  let weightDiff = parseInt(this.weight) - parseInt(humanWeight);
+  if (weightDiff > 200) {
+      return "The " + this.species + " weighed " + weightDiff + " lbs more than you!";
+  }
+  else {
+    return this.fact();
+  }
 };
 
 
@@ -178,19 +189,27 @@ dinoTiles.prototype.compareOne = function(){
 // Compare Height
 
 dinoTiles.prototype.compareTwo = function(){
-  var humanHeight = `${human.height()}`;
-  var heightDiff = Math.round(parseInt(this.height) / parseInt(humanHeight));
-  return "The " + this.species + " was " + heightDiff + " times taller than you!";
+  const humanHeight = `${human.height()}`;
+  let heightDiff = Math.round(parseInt(this.height) / parseInt(humanHeight));
+  if (heightDiff > 2) {
+      return "The " + this.species + " was " + heightDiff + " times taller than you!";
+  }
+  else {
+    return this.fact()
+  }
 };
 
 // Create Dino Compare Method 3
 // Compare Diet
 
 dinoTiles.prototype.compareThree = function(){
-  var humanDiet = `${human.diet()}`;
-  var dinoDiet = this.diet;
+  const humanDiet = `${human.diet()}`;
+  let dinoDiet = this.diet;
   if (`${human.diet()}` === dinoDiet.charAt(0).toUpperCase() + dinoDiet.slice(1)) {
     return this.species + " had the same basic diet as you!";
+  }
+  else {
+    return "Dinosaurs are awesome!"();
   }
 };
 
@@ -215,81 +234,7 @@ document.getElementById('btn').addEventListener('click', hideForm);
 // Add tiles to DOM
 // On button click, prepare and display infographic
 document.getElementById('btn').addEventListener('click', displayDino);
-document.getElementById('btn').addEventListener('click', displayDino1);
-document.getElementById('btn').addEventListener('click', displayDino2);
-document.getElementById('btn').addEventListener('click', displayDino3);
-document.getElementById('btn').addEventListener('click', displayDino4);
-document.getElementById('btn').addEventListener('click', displayDino5);
-document.getElementById('btn').addEventListener('click', displayDino6);
-document.getElementById('btn').addEventListener('click', displayDino7);
-document.getElementById('btn').addEventListener('click', displayDino8);
-document.getElementById('btn').addEventListener('click', displayDino9);
 
-function displayDino(){
-    const dinoDiv = document.createElement('div');
-    dinoDiv.className = 'grid-item';
-    dinoDiv.innerHTML = `<h3>${dinoData[0]["species"]}<h3><img src="images/${(dinoData[0]["species"].toLowerCase())}.png"><p>${Tri.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv);
-}
-
-function displayDino1(){
-    const dinoDiv1 = document.createElement('div');
-    dinoDiv1.className = 'grid-item';
-    dinoDiv1.innerHTML = `<h3>${dinoData[1]["species"]}<h3><img src="images/${(dinoData[1]["species"].toLowerCase())}.png"><p>${Tyr.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv1);
-}
-
-function displayDino2(){
-    const dinoDiv2 = document.createElement('div');
-    dinoDiv2.className = 'grid-item';
-    dinoDiv2.innerHTML = `<h3>${dinoData[2]["species"]}<h3><img src="images/${(dinoData[2]["species"].toLowerCase())}.png"><p>${Ank.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv2);
-}
-
-function displayDino3(){
-    const dinoDiv3 = document.createElement('div');
-    dinoDiv3.className = 'grid-item';
-    dinoDiv3.innerHTML = `<h3>${dinoData[3]["species"]}<h3><img src="images/${(dinoData[3]["species"].toLowerCase())}.png"><p>${Bra.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv3);
-}
-
-function displayDino4(){
-    const dinoDiv4 = document.createElement('div');
-    dinoDiv4.className = 'grid-item';
-    dinoDiv4.innerHTML = `<h3>${human.name()}<h3><img src="images/human.png">`;
-    document.getElementById('grid').appendChild(dinoDiv4);
-}
-function displayDino5(){
-    const dinoDiv5 = document.createElement('div');
-    dinoDiv5.className = 'grid-item';
-    dinoDiv5.innerHTML = `<h3>${dinoData[4]["species"]}<h3><img src="images/${(dinoData[4]["species"].toLowerCase())}.png"><p>${Ste.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv5);
-}
-
-function displayDino6(){
-    const dinoDiv6 = document.createElement('div');
-    dinoDiv6.className = 'grid-item';
-    dinoDiv6.innerHTML = `<h3>${dinoData[5]["species"]}<h3><img src="images/${(dinoData[5]["species"].toLowerCase())}.png"><p>${Ela.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv6);
-}
-
-function displayDino7(){
-    const dinoDiv7 = document.createElement('div');
-    dinoDiv7.className = 'grid-item';
-    dinoDiv7.innerHTML = `<h3>${dinoData[6]["species"]}<h3><img src="images/${(dinoData[6]["species"].toLowerCase())}.png"><p>${Pte.fact()}</p>`
-    document.getElementById('grid').appendChild(dinoDiv7);
-}
-
-function displayDino8(){
-    const dinoDiv8 = document.createElement('div');
-    dinoDiv8.className = 'grid-item';
-    dinoDiv8.innerHTML = `<h3>${dinoData[7]["species"]}<h3><img src="images/${(dinoData[7]["species"].toLowerCase())}.png"><p>All birds are considered dinosaurs.</p>`
-    document.getElementById('grid').appendChild(dinoDiv8);
-}
-
-
-//Failed attempt at executing the above within a loop.
-/*
   function displayDino(){
     let humanPresent = false;
     for (var i = 0; i < dinoData.length; i++) {
@@ -300,8 +245,28 @@ function displayDino8(){
         humanPresent = true;
         i--;
       }else{
-        dinoDiv.innerHTML = `<h3>${dinoData[i]["species"]}<h3><img src="images/${(dinoData[i]["species"].toLowerCase())}.png"><p>${Tyr.fact()}</p>`;
+        dinoDiv.innerHTML = `<h3>${dinoData[i]["species"]}<h3><img src="images/${(dinoData[i]["species"].toLowerCase())}.png"><p>${dinoData[i].fact()}`;
       }
       document.getElementById('grid').appendChild(dinoDiv);
     }}
-    */
+
+    function displayDino(){
+      let humanPresent = false;
+      let pigeonPresent = false;
+      for (var i = 0; i < dinoData.length; i++) {
+        const dinoDiv = document.createElement('div');
+        dinoDiv.className = 'grid-item';
+        if(humanPresent === false && i === 4){
+          dinoDiv.innerHTML = `<h3>${human.name()}<h3><img src="images/human.png">`;
+          humanPresent = true;
+          i--;
+        }
+        else if (i < 7) {
+          dinoDiv.innerHTML = `<h3>${dinoData[i]["species"]}<h3><img src="images/${(dinoData[i]["species"].toLowerCase())}.png"><p>${dinoData[i].fact()}`;
+        }
+
+        else{
+          dinoDiv.innerHTML = `<h3>Pigeon<h3><img src="images/pigeon.png"><p>All birds are considered dinosaurs</p>`;
+        }
+        document.getElementById('grid').appendChild(dinoDiv);
+      }}
